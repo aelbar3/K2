@@ -1,0 +1,668 @@
+{
+	"swagger" : "2.0",
+	"openapi": "3.0.1",
+	"info": {
+		"title": "e-Services Application API",
+		"description": "This API can be used to get all API information about the e-Services Application",
+		"license": {
+			"name": "Apache 2.0",
+			"url": "http://springdoc.org"
+		},
+		"version": "1.0.1"
+	},
+	"servers": [
+		
+	],
+	"security": [
+		{
+			"Authorization": [
+				"read",
+				"write"
+			]
+		}
+	],
+	"host": "https://192.168.51.5:9445/cdi/api/v1",
+  	"produces": [
+   		 "application/json"
+  	],
+	"paths": {
+		"/common/bpm/ping": {
+			"get": {
+			   "tags": [
+				  "common-ctrl"
+			   ],
+			   "description": "get BPM ping.",
+			   "operationId": "getBpmPing",
+			   "responses": {
+				  "200": {
+					 "description": "OK",
+					 "content": {
+						"application/json": {
+						   "schema": {
+							  "$ref": "#/components/schemas/ServiceReturnBoolean"
+						   }
+						}
+					 }
+				  },
+				  "401": {
+					 "description": "Unauthorized",
+					 "content": {
+						"*/*": {
+						   "schema": {
+							  "$ref": "#/components/schemas/ServiceReturnAdminResult"
+						   }
+						}
+					 }
+				  },
+				  "403": {
+					 "description": "Forbidden",
+					 "content": {
+						"*/*": {
+						   "schema": {
+							  "$ref": "#/components/schemas/ServiceReturnAdminResult"
+						   }
+						}
+					 }
+				  },
+				  "404": {
+					 "description": "Not Found",
+					 "content": {
+						"*/*": {
+						   "schema": {
+							  "$ref": "#/components/schemas/ServiceReturnAdminResult"
+						   }
+						}
+					 }
+				  },
+				  "500": {
+					 "description": "Internal Server Error",
+					 "content": {
+						"*/*": {
+						   "schema": {
+							  "$ref": "#/components/schemas/ServiceReturnAdminResult"
+						   }
+						}
+					 }
+				  }
+			   }
+			}
+		 },
+
+		"/common/team/members": {
+			"get": {
+				"tags": [
+					"common-ctrl"
+				],
+				"operationId": "getTeamMembers",
+				"parameters": [
+					{
+						"name": "authName",
+						"in": "query",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"500": {
+						"description": "Internal Server Error",
+						"content": {
+							"*/*": {
+								"schema": {
+									"$ref": "#/components/schemas/ServiceReturnAdminResult"
+								}
+							}
+						}
+					},
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ServiceReturnString"
+								}
+							}
+						}
+					},
+					"401": {
+						"description": "Unauthorized",
+						"content": {
+							"*/*": {
+								"schema": {
+									"$ref": "#/components/schemas/ServiceReturnAdminResult"
+								}
+							}
+						}
+					},
+					"403": {
+						"description": "Forbidden",
+						"content": {
+							"*/*": {
+								"schema": {
+									"$ref": "#/components/schemas/ServiceReturnAdminResult"
+								}
+							}
+						}
+					},
+					"404": {
+						"description": "Not Found",
+						"content": {
+							"*/*": {
+								"schema": {
+									"$ref": "#/components/schemas/ServiceReturnAdminResult"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/common/team/ps/members": {
+            "get": {
+                "tags": [
+                    "common-ctrl"
+                ],
+                "operationId": "getTeamPSMembers",
+                "parameters": [
+                    {
+                        "name": "pid",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "authName",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ServiceReturnString"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ServiceReturnAdminResult"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ServiceReturnAdminResult"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ServiceReturnAdminResult"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ServiceReturnAdminResult"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+		"/common/security/assistant": {
+         "post": {
+            "tags": [
+               "common-ctrl"
+            ],
+            "operationId": "handleAssistantSecurity",
+            "parameters": [
+               {
+                  "name": "caseId",
+                  "in": "query",
+                  "required": true,
+                  "schema": {
+                     "type": "string"
+                  }
+               },
+               {
+                  "name": "departmentId",
+                  "in": "query",
+                  "required": true,
+                  "schema": {
+                     "type": "integer",
+                     "format": "int32"
+                  }
+               },
+               {
+                  "name": "limitedAccess",
+                  "in": "query",
+                  "required": true,
+                  "schema": {
+                     "type": "boolean"
+                  }
+               }
+            ],
+            "responses": {
+               "200": {
+                  "description": "OK",
+                  "content": {
+                     "application/json": {
+                        "schema": {
+                           "$ref": "#/components/schemas/ServiceReturnBoolean"
+                        }
+                     }
+                  }
+               },
+               "401": {
+                  "description": "Unauthorized",
+                  "content": {
+                     "*/*": {
+                        "schema": {
+                           "$ref": "#/components/schemas/ServiceReturnAdminResult"
+                        }
+                     }
+                  }
+               },
+               "403": {
+                  "description": "Forbidden",
+                  "content": {
+                     "*/*": {
+                        "schema": {
+                           "$ref": "#/components/schemas/ServiceReturnAdminResult"
+                        }
+                     }
+                  }
+               },
+               "404": {
+                  "description": "Not Found",
+                  "content": {
+                     "*/*": {
+                        "schema": {
+                           "$ref": "#/components/schemas/ServiceReturnAdminResult"
+                        }
+                     }
+                  }
+               },
+               "500": {
+                  "description": "Internal Server Error",
+                  "content": {
+                     "*/*": {
+                        "schema": {
+                           "$ref": "#/components/schemas/ServiceReturnAdminResult"
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      },
+	  "/common/user/out-office": {
+         "get": {
+            "tags": [
+               "common-ctrl"
+            ],
+            "description": "check user is out of office.",
+            "operationId": "isOutOffice",
+            "parameters": [
+               {
+                  "name": "domainName",
+                  "in": "query",
+                  "required": true,
+                  "schema": {
+                     "type": "string"
+                  }
+               }
+            ],
+            "responses": {
+               "200": {
+                  "description": "OK",
+                  "content": {
+                     "application/json": {
+                        "schema": {
+                           "$ref": "#/components/schemas/ServiceReturnBoolean"
+                        }
+                     }
+                  }
+               },
+               "401": {
+                  "description": "Unauthorized",
+                  "content": {
+                     "*/*": {
+                        "schema": {
+                           "$ref": "#/components/schemas/ServiceReturnAdminResult"
+                        }
+                     }
+                  }
+               },
+               "403": {
+                  "description": "Forbidden",
+                  "content": {
+                     "*/*": {
+                        "schema": {
+                           "$ref": "#/components/schemas/ServiceReturnAdminResult"
+                        }
+                     }
+                  }
+               },
+               "404": {
+                  "description": "Not Found",
+                  "content": {
+                     "*/*": {
+                        "schema": {
+                           "$ref": "#/components/schemas/ServiceReturnAdminResult"
+                        }
+                     }
+                  }
+               },
+               "500": {
+                  "description": "Internal Server Error",
+                  "content": {
+                     "*/*": {
+                        "schema": {
+                           "$ref": "#/components/schemas/ServiceReturnAdminResult"
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      }		,
+        "/grievance-case/{caseId}/details": {
+            "get": {
+                "tags": [
+                    "Grievance Case Ctrl"
+                ],
+                "description": "Get case details.",
+                "operationId": "findById_1",
+                "parameters": [
+                    {
+                        "name": "caseId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": null
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ServiceReturnGrievanceCaseDTO_DETAILS"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ServiceReturnAdminResult"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ServiceReturnAdminResult"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ServiceReturnAdminResult"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ServiceReturnAdminResult"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/investigation-case/{caseId}/details": {
+            "get": {
+                "tags": [
+                    "Investigation Case Ctrl"
+                ],
+                "description": "Get case details.",
+                "operationId": "findById",
+                "parameters": [
+                    {
+                        "name": "caseId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": null
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ServiceReturnInvestigationCaseDTO_DETAILS"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ServiceReturnAdminResult"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ServiceReturnAdminResult"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ServiceReturnAdminResult"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ServiceReturnAdminResult"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        } ,
+	  
+		"/common/security": {
+			"post": {
+				"tags": [
+					"common-ctrl"
+				],
+				"operationId": "handleSecurity",
+				"parameters": [
+					{
+						"name": "caseId",
+						"in": "query",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"name": "authType",
+						"in": "query",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "array",
+								"items": {
+									"type": "string"
+								}
+							}
+						}
+					},
+					"required": true
+				},
+				"responses": {
+					"500": {
+						"description": "Internal Server Error",
+						"content": {
+							"*/*": {
+								"schema": {
+									"$ref": "#/components/schemas/ServiceReturnAdminResult"
+								}
+							}
+						}
+					},
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ServiceReturnBoolean"
+								}
+							}
+						}
+					},
+					"401": {
+						"description": "Unauthorized",
+						"content": {
+							"*/*": {
+								"schema": {
+									"$ref": "#/components/schemas/ServiceReturnAdminResult"
+								}
+							}
+						}
+					},
+					"403": {
+						"description": "Forbidden",
+						"content": {
+							"*/*": {
+								"schema": {
+									"$ref": "#/components/schemas/ServiceReturnAdminResult"
+								}
+							}
+						}
+					},
+					"404": {
+						"description": "Not Found",
+						"content": {
+							"*/*": {
+								"schema": {
+									"$ref": "#/components/schemas/ServiceReturnAdminResult"
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+
+	},
+	"components": {
+		"schemas": {
+			"ServiceReturnAdminResult": {
+				"type": "object",
+				"properties": {
+					"sc": {
+						"type": "integer",
+						"format": "int32"
+					}
+				}
+			},
+			"ServiceReturnBoolean": {
+				"type": "object",
+				"properties": {
+					"sc": {
+						"type": "integer",
+						"format": "int32"
+					}
+				}
+			},
+			"ServiceReturnString": {
+				"type": "object",
+				"properties": {
+					"sc": {
+						"type": "integer",
+						"format": "int32"
+					}
+				}
+			}
+		},
+		"securitySchemes": {
+		}
+	}
+}
