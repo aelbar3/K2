@@ -44,8 +44,8 @@
       "description": "Operations about user"
     }
   ],
-  host: "github.com",
-  produces: [
+  "host": "github.com",
+  "produces": [
 	"application/json"
   ],
   "paths": {
