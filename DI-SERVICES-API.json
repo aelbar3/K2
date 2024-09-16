@@ -21,7 +21,7 @@
 			]
 		}
 	],
-	"host": "https://192.168.51.5:9445/cdi/api/v1",
+	"host": "github.com",
   	"produces": [
    		 "application/json"
   	],
