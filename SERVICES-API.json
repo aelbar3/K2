@@ -158,40 +158,40 @@
                }
             }
          }
-      },
-      "components":{
-         "schemas":{
-            "ServiceReturnAdminResult":{
-               "type":"object",
-               "properties":{
-                  "sc":{
-                     "type":"integer",
-                     "format":"int32"
-                  }
-               }
-            },
-            "ServiceReturnBoolean":{
-               "type":"object",
-               "properties":{
-                  "sc":{
-                     "type":"integer",
-                     "format":"int32"
-                  }
-               }
-            },
-            "ServiceReturnString":{
-               "type":"object",
-               "properties":{
-                  "sc":{
-                     "type":"integer",
-                     "format":"int32"
-                  }
+      }
+   },
+   "components":{
+      "schemas":{
+         "ServiceReturnAdminResult":{
+            "type":"object",
+            "properties":{
+               "sc":{
+                  "type":"integer",
+                  "format":"int32"
                }
             }
          },
-         "securitySchemes":{
-            
+         "ServiceReturnBoolean":{
+            "type":"object",
+            "properties":{
+               "sc":{
+                  "type":"integer",
+                  "format":"int32"
+               }
+            }
+         },
+         "ServiceReturnString":{
+            "type":"object",
+            "properties":{
+               "sc":{
+                  "type":"integer",
+                  "format":"int32"
+               }
+            }
          }
+      },
+      "securitySchemes":{
+         
       }
    }
 }
