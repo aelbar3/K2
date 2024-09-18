@@ -26,6 +26,78 @@
       "application/json"
    ],
    "paths":{
+      "/common/user/out-office":{
+         "get":{
+            "tags":[
+               "common-ctrl"
+            ],
+            "description":"check user is out of office.",
+            "operationId":"isOutOffice",
+            "parameters":[
+               {
+                  "name":"domainName",
+                  "in":"query",
+                  "required":true,
+                  "schema":{
+                     "type":"string",
+                     "example":null
+                  }
+               }
+            ],
+            "responses":{
+               "200":{
+                  "description":"OK",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/ServiceReturnBoolean"
+                        }
+                     }
+                  }
+               },
+               "401":{
+                  "description":"Unauthorized",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/ServiceReturnAdminResult"
+                        }
+                     }
+                  }
+               },
+               "403":{
+                  "description":"Forbidden",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/ServiceReturnAdminResult"
+                        }
+                     }
+                  }
+               },
+               "404":{
+                  "description":"Not Found",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/ServiceReturnAdminResult"
+                        }
+                     }
+                  }
+               },
+               "500":{
+                  "description":"Internal Server Error",
+                  "content":{
+                     "*/*":{
+                        "schema":{
+                           "$ref":"#/components/schemas/ServiceReturnAdminResult"
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      },
       "/common/bpm/ping":{
          "get":{
             "tags":[
